@@ -8,7 +8,7 @@ let folders = [
 // 配置
 const CONFIG = {
   // 设置为 true 使用本地存储数据，false 使用后端 API
-  useLocalStorage: true,
+  useLocalStorage: false,
   // API 基础 URL
   apiBaseUrl: '/api'
 };

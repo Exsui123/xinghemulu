@@ -19,7 +19,28 @@ export default {
     }
     
     // 静态文件服务
-    return handleStaticRequest(request, env);
+    try {
+      // 如果是根路径，返回 index.html
+      if (path === '/' || path === '') {
+        return new Response(await fetch(new URL('/index.html', request.url)).then(res => res.text()), {
+          headers: { 'Content-Type': 'text/html' }
+        });
+      }
+      
+      // 尝试获取文件
+      const response = await fetch(request);
+      if (response.ok) {
+        return response;
+      }
+      
+      // 如果文件不存在，返回 index.html（用于客户端路由）
+      return new Response(await fetch(new URL('/index.html', request.url)).then(res => res.text()), {
+        headers: { 'Content-Type': 'text/html' }
+      });
+    } catch (error) {
+      console.error('Static file error:', error);
+      return new Response('Internal Error', { status: 500 });
+    }
   }
 };
 
@@ -454,38 +475,6 @@ async function exportDirectories(env) {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
     });
-  }
-}
-
-// 处理静态文件请求
-async function handleStaticRequest(request, env) {
-  const url = new URL(request.url);
-  let path = url.pathname;
-  
-  // 默认返回 index.html
-  if (path === '/' || path === '') {
-    path = '/index.html';
-  }
-  
-  try {
-    // 使用 Cloudflare Pages 资源
-    const asset = await env.__STATIC_CONTENT.get(path);
-    
-    if (asset === null) {
-      // 如果文件不存在，返回 index.html（用于客户端路由）
-      return await env.__STATIC_CONTENT.get('/index.html');
-    }
-    
-    // 设置适当的内容类型
-    const contentType = getContentType(path);
-    const headers = new Headers(asset.headers);
-    headers.set('Content-Type', contentType);
-    
-    return new Response(asset.body, {
-      headers
-    });
-  } catch (error) {
-    return new Response('Internal Error', { status: 500 });
   }
 }
 
