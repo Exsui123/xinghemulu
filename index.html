@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>星河教辅目录展示</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- 页面头部 -->
+  <header>
+    <div class="header-content">
+      <h1 class="site-title">星河教辅目录展示</h1>
+      <p class="site-description">请注意，该目录仅展示"资料类型"，没有展示教案、ppt、名师公开课、教辅资料等具体的资料</p>
+    </div>
+  </header>
+
+  <!-- 主内容区域 -->
+  <main>
+    <div class="container">
+      <!-- 面包屑导航 -->
+      <div class="breadcrumb-container">
+        <div class="breadcrumb">
+          <button class="breadcrumb-item home" data-id="null">
+            <i class="fas fa-home icon"></i>
+            首页
+          </button>
+        </div>
+      </div>
+
+      <!-- 管理员工具栏 -->
+      <div class="admin-toolbar" id="adminToolbar">
+        <button class="admin-button primary" id="batchAddBtn">
+          <i class="fas fa-folder-plus"></i>
+          批量添加
+        </button>
+        <button class="admin-button" id="exportBtn">
+          <i class="fas fa-file-export"></i>
+          导出目录
+        </button>
+      </div>
+
+      <!-- 文件夹列表 -->
+      <div class="folder-list" id="folderList">
+        <!-- 文件夹内容将通过 JS 动态生成 -->
+      </div>
+    </div>
+  </main>
+
+  <!-- 登录容器 -->
+  <div class="login-container" id="loginContainer">
+    <div class="login-form-container">
+      <h2 class="login-title">管理员登录</h2>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="username">用户名</label>
+          <input type="text" id="username" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="password">密码</label>
+          <input type="password" id="password" class="form-control" required>
+        </div>
+        <div class="login-error" id="loginError"></div>
+        <button type="submit" class="btn btn-primary">登录</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 批量添加模态框 -->
+  <div class="modal" id="batchAddModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">批量添加文件夹</h3>
+        <button class="close-button" id="closeModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="batchAddForm">
+          <div class="form-group">
+            <label for="folderNames">输入文件夹名称（每行一个）</label>
+            <textarea id="folderNames" class="form-control" rows="10"></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" id="cancelAddBtn">取消</button>
+            <button type="submit" class="btn btn-primary">添加</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html> 

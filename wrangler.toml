@@ -1,0 +1,20 @@
+name = "xinghemulu"
+main = "worker.js"
+compatibility_date = "2023-10-30"
+
+# 部署设置
+[site]
+bucket = "./"
+entry-point = "."
+
+# Cloudflare Pages 配置
+[build]
+command = ""
+upload.format = "directory"
+upload.dir = "./"
+
+# D1 数据库配置（需要先创建数据库）
+[[d1_databases]]
+binding = "DB"
+database_name = "xinghe_directory_db"
+database_id = ""  # 创建数据库后填写 
