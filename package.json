@@ -3,13 +3,17 @@
   "version": "1.0.0",
   "description": "星河教辅目录结构管理系统",
   "main": "worker.js",
+  "type": "module",
   "scripts": {
     "start": "node start-server.js",
     "deploy": "wrangler deploy"
   },
   "dependencies": {
     "@cloudflare/workers-types": "^4.20240208.0",
-    "wrangler": "^3.28.2"
+    "wrangler": "^3.28.2",
+    "@rollup/plugin-inject": "^5.0.5",
+    "@jridgewell/sourcemap-codec": "^1.4.8",
+    "@supabase/supabase-js": "^1.0.0"
   },
   "devDependencies": {
     "http-server": "^14.1.1"
